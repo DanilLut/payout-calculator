@@ -20,22 +20,26 @@ import {
 export function Dashboard() {
     const [projects, setProjects] = useState<Project[]>(() => {
         const savedData = localStorage.getItem('projectsData')
-        return savedData ? JSON.parse(savedData) : []
+        return savedData ? (JSON.parse(savedData) as Project[]) : []
     })
 
     const [members, setMembers] = useState<ProjectMember[]>(() => {
         const savedMembers = localStorage.getItem('membersData')
-        return savedMembers ? JSON.parse(savedMembers) : []
+        return savedMembers ? (JSON.parse(savedMembers) as ProjectMember[]) : []
     })
 
     const [projectTypes, setProjectTypes] = useState<ProjectType[]>(() => {
         const savedProjectTypes = localStorage.getItem('projectTypesData')
-        return savedProjectTypes ? JSON.parse(savedProjectTypes) : []
+        return savedProjectTypes
+            ? (JSON.parse(savedProjectTypes) as ProjectType[])
+            : []
     })
 
     const [projectRoles, setProjectRoles] = useState<ProjectRole[]>(() => {
         const savedProjectRoles = localStorage.getItem('projectRolesData')
-        return savedProjectRoles ? JSON.parse(savedProjectRoles) : []
+        return savedProjectRoles
+            ? (JSON.parse(savedProjectRoles) as ProjectRole[])
+            : []
     })
 
     useEffect(() => {

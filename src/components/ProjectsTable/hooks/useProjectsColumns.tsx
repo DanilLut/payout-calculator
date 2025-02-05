@@ -65,7 +65,9 @@ export const useProjectsColumns = (
                             value={currentProjectType?.title || ''}
                             onValueChange={(selectedTitle) => {
                                 const newProjectType = projectTypes.find(
-                                    (pt) => pt.title === selectedTitle
+                                    (pt) =>
+                                        pt.title ===
+                                        (selectedTitle as ProjectTypeTitle)
                                 )
                                 if (newProjectType) {
                                     setProjects((prev) =>
