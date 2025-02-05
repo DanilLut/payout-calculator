@@ -85,7 +85,7 @@ export function Dashboard() {
 
     return (
         <div className="container mx-auto py-10 grid">
-            <div className="ml-auto flex gap-4">
+            <div className="ml-auto flex gap-4 mb-8">
                 <MembersManager members={members} setMembers={setMembers} />
                 <Button
                     onClick={() =>

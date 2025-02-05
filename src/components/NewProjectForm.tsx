@@ -74,7 +74,7 @@ export const NewProjectForm = ({
                         required
                     />
                 </div>
-                <div className="w-[300px]">
+                <div>
                     <Select
                         value={selectedProjectTypeId}
                         onValueChange={(value) =>
