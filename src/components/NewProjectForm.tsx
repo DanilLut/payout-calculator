@@ -42,12 +42,12 @@ export const NewProjectForm = ({
             id: uuidv4() as UUID,
             clientFullName: newClientName.trim(),
             projectTypeId: selectedProjectTypeId,
-            roleAssignments: Object.keys(projectType.payoutPercentages).reduce(
+            roleAssignments: Object.keys(projectType.payoutPercentages).reduce<Record<UUID, null>>(
                 (acc, roleId) => {
                     acc[roleId as UUID] = null
                     return acc
                 },
-                {} as Record<UUID, null>
+                {}
             ),
             selected: false,
             selectedTimestamp: null,
@@ -70,16 +70,16 @@ export const NewProjectForm = ({
                     <Input
                         placeholder="Client Full Name"
                         value={newClientName}
-                        onChange={(e) => setNewClientName(e.target.value)}
+                        onChange={(e) => { setNewClientName(e.target.value)}}
                         required
                     />
                 </div>
                 <div>
                     <Select
                         value={selectedProjectTypeId}
-                        onValueChange={(value) =>
+                        onValueChange={(value) => {
                             setSelectedProjectTypeId(value as UUID)
-                        }
+                        }}
                         required
                     >
                         <SelectTrigger>

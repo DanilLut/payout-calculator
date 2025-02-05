@@ -83,7 +83,7 @@ export function Dashboard() {
 
     const selectedData = projects
         .filter((item) => item.selected)
-        .sort((a, b) => (b.selectedTimestamp || 0) - (a.selectedTimestamp || 0))
+        .sort((a, b) => (b.selectedTimestamp ?? 0) - (a.selectedTimestamp ?? 0))
 
     const unselectedData = projects.filter((item) => !item.selected)
 
@@ -92,14 +92,14 @@ export function Dashboard() {
             <div className="ml-auto flex gap-4 mb-8">
                 <MembersManager members={members} setMembers={setMembers} />
                 <Button
-                    onClick={() =>
+                    onClick={() => {
                         handleExport(
                             projects,
                             members,
                             projectTypes,
                             projectRoles
                         )
-                    }
+                    }}
                 >
                     <RiUploadLine />
                     Export Data
@@ -111,7 +111,7 @@ export function Dashboard() {
                         <input
                             type="file"
                             accept=".json"
-                            onChange={(e) =>
+                            onChange={(e) => {
                                 handleImport(
                                     e,
                                     setProjects,
@@ -119,7 +119,7 @@ export function Dashboard() {
                                     setProjectTypes,
                                     setProjectRoles
                                 )
-                            }
+                            }}
                             className="hidden"
                         />
                     </label>

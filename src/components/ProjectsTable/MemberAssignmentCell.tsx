@@ -28,14 +28,14 @@ export const MemberAssignmentCell = ({
         }
     }, [members, memberId, onValueChange])
 
-    const selectedName = members.find((n) => n.id === memberId)?.fullName || '-'
+    const selectedName = members.find((n) => n.id === memberId)?.fullName ?? '-'
 
     return (
         <Select
             value={memberId ?? '-'}
-            onValueChange={(newId) =>
+            onValueChange={(newId) => {
                 onValueChange(newId === '-' ? null : newId)
-            }
+            }}
         >
             <SelectTrigger>
                 <SelectValue placeholder="-">{selectedName}</SelectValue>

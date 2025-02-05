@@ -35,7 +35,7 @@ export const RowActionsCell = ({ row, setProjects }: RowActionsCellProps) => {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => setIsDialogOpen(true)}>
+                    <DropdownMenuItem onClick={() => { setIsDialogOpen(true)}}>
                         Show Info
                     </DropdownMenuItem>
                     <DropdownMenuItem>Edit</DropdownMenuItem>

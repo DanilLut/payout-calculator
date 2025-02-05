@@ -33,7 +33,7 @@ export const RoleAssignmentRows = ({
             const member = members.find((m) => m.id === memberId)
 
             const rolePayoutPercentage =
-                projectType?.payoutPercentages[roleId as UUID] || 0
+                projectType?.payoutPercentages[roleId as UUID] ?? 0
             const basePayoutAmount =
                 ((projectType?.price ?? 0) / 100) * rolePayoutPercentage
 
@@ -50,7 +50,7 @@ export const RoleAssignmentRows = ({
 
             return (
                 <TableRow key={roleId}>
-                    <TableCell>{role?.name || 'Unassigned Role'}</TableCell>
+                    <TableCell>{role?.name ?? 'Unassigned Role'}</TableCell>
                     <TableCell>
                         <Select
                             value={memberId ?? 'unassigned'}
@@ -77,7 +77,7 @@ export const RoleAssignmentRows = ({
                         >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select member">
-                                    {member?.fullName || '-'}
+                                    {member?.fullName ?? '-'}
                                 </SelectValue>
                             </SelectTrigger>
                             <SelectContent>

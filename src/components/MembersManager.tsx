@@ -14,12 +14,12 @@ import { Input } from '@/components/ui/input'
 
 import { RiGroupLine } from '@remixicon/react'
 
-type MembersManagerProps = {
+interface MembersManagerProps {
     members: ProjectMember[]
     setMembers: React.Dispatch<React.SetStateAction<ProjectMember[]>>
 }
 
-type MemberFormState = {
+interface MemberFormState {
     currentName: string
     editingId: string | null
 }
@@ -89,12 +89,12 @@ export const MembersManager = ({
                     <div className="flex gap-2">
                         <Input
                             value={formState.currentName}
-                            onChange={(e) =>
+                            onChange={(e) => {
                                 setFormState((prev) => ({
                                     ...prev,
                                     currentName: e.target.value,
                                 }))
-                            }
+                            }}
                             placeholder="Enter member name"
                             aria-label="Member name"
                         />
@@ -118,7 +118,7 @@ export const MembersManager = ({
     )
 }
 
-type MemberListProps = {
+interface MemberListProps {
     members: ProjectMember[]
     editingId: string | null
     onEdit: (member: ProjectMember) => void
@@ -153,7 +153,7 @@ const MemberList = ({
                             type="button"
                             variant="outline"
                             size="sm"
-                            onClick={() => onEdit(member)}
+                            onClick={() => { onEdit(member) }}
                             aria-label={`Edit ${member.fullName}`}
                         >
                             Edit
@@ -162,7 +162,7 @@ const MemberList = ({
                     <Button
                         variant="destructive"
                         size="sm"
-                        onClick={() => onDelete(member.id)}
+                        onClick={() => { onDelete(member.id) }}
                         aria-label={`Delete ${member.fullName}`}
                     >
                         Delete

@@ -10,7 +10,9 @@ export default tseslint.config(
     {
         extends: [
             js.configs.recommended,
-            ...tseslint.configs.recommendedTypeChecked,
+            // ...tseslint.configs.recommendedTypeChecked,
+            ...tseslint.configs.strictTypeChecked,
+            ...tseslint.configs.stylisticTypeChecked,
         ],
         files: ['**/*.{ts,tsx}'],
         languageOptions: {

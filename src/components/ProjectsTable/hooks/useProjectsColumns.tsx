@@ -62,7 +62,7 @@ export const useProjectsColumns = (
 
                     return (
                         <Select
-                            value={currentProjectType?.title || ''}
+                            value={currentProjectType?.title ?? ''}
                             onValueChange={(selectedTitle) => {
                                 const newProjectType = projectTypes.find(
                                     (pt) =>
@@ -76,14 +76,14 @@ export const useProjectsColumns = (
                                                 const newRoleAssignments =
                                                     Object.keys(
                                                         newProjectType.payoutPercentages
-                                                    ).reduce(
+                                                    ).reduce<Record<UUID, null>>(
                                                         (acc, roleId) => {
                                                             acc[
                                                                 roleId as UUID
                                                             ] = null
                                                             return acc
                                                         },
-                                                        {} as Record<UUID, null>
+                                                        {}
                                                     )
 
                                                 return {
@@ -158,7 +158,7 @@ export const useProjectsColumns = (
                     const projectType = projectTypes.find(
                         (pt) => pt.id === row.original.projectTypeId
                     )
-                    return projectType?.price || 'N/A'
+                    return projectType?.price ?? 'N/A'
                 },
             },
 

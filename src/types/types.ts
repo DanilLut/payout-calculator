@@ -17,7 +17,7 @@ export interface ProjectType {
     id: UUID
     title: ProjectTypeTitle
     price: number
-    payoutPercentages: { [roleId: UUID]: number }
+    payoutPercentages: Record<UUID, number>
     isDeleted?: boolean
 }
 
@@ -30,7 +30,7 @@ export interface Project {
     id: UUID
     clientFullName: string
     projectTypeId: UUID
-    roleAssignments: { [roleId: UUID]: UUID | null }
+    roleAssignments: Record<UUID, UUID | null>
     selected: boolean
     selectedTimestamp: number | null
     date: string | undefined
