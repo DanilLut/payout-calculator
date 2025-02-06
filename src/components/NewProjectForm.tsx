@@ -15,6 +15,10 @@ import {
     SelectValue,
 } from '@/components/ui/select'
 
+import {
+    RiAddLargeLine,
+} from '@remixicon/react'
+
 interface NewProjectFormProps {
     projectTypes: ProjectType[]
     setProjects: React.Dispatch<React.SetStateAction<Project[]>>
@@ -60,7 +64,10 @@ export const NewProjectForm = ({
 
     return (
         <div className="mb-8">
-            <h2 className="text-xl font-bold mb-4">Create New Project</h2>
+            <h2 className="text-xl font-bold mb-4  flex items-center gap-2">
+                <RiAddLargeLine />
+                New Project
+            </h2>
             <form
                 onSubmit={handleCreateProject}
                 className="flex gap-4 flex-col md:flex-row"
