@@ -33,7 +33,9 @@ export function ThemeToggle() {
                 {Object.entries(themeNames).map(([key, label]) => (
                     <DropdownMenuItem
                         key={key}
-                        onClick={() => { setTheme(key as Theme)}}
+                        onClick={() => {
+                            setTheme(key as Theme)
+                        }}
                     >
                         {label}
                     </DropdownMenuItem>

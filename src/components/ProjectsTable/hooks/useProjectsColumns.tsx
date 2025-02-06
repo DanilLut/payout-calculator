@@ -31,6 +31,13 @@ import {
 } from '@/components/ui/select'
 import { UUID } from 'crypto'
 
+import {
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
+} from '@/components/ui/collapsible'
+import CollapsibleSection from '../ProjectMembersCollapsible'
+
 export const useProjectsColumns = (
     members: ProjectMember[],
     projectTypes: ProjectType[],
@@ -76,15 +83,13 @@ export const useProjectsColumns = (
                                                 const newRoleAssignments =
                                                     Object.keys(
                                                         newProjectType.payoutPercentages
-                                                    ).reduce<Record<UUID, null>>(
-                                                        (acc, roleId) => {
-                                                            acc[
-                                                                roleId as UUID
-                                                            ] = null
-                                                            return acc
-                                                        },
-                                                        {}
-                                                    )
+                                                    ).reduce<
+                                                        Record<UUID, null>
+                                                    >((acc, roleId) => {
+                                                        acc[roleId as UUID] =
+                                                            null
+                                                        return acc
+                                                    }, {})
 
                                                 return {
                                                     ...p,
@@ -126,29 +131,31 @@ export const useProjectsColumns = (
                     )
 
                     return (
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>Project Role Name</TableHead>
-                                    <TableHead>Assigned Member</TableHead>
-                                    <TableHead className="text-right">
-                                        Выплата, грн.
-                                    </TableHead>
-                                    <TableHead className="text-right">
-                                        Богдану Л.
-                                    </TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                <RoleAssignmentRows
-                                    project={project}
-                                    projectType={projectType}
-                                    members={members}
-                                    projectRoles={projectRoles}
-                                    setProjects={setProjects}
-                                />
-                            </TableBody>
-                        </Table>
+                        <CollapsibleSection>
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>Project Role Name</TableHead>
+                                        <TableHead>Assigned Member</TableHead>
+                                        <TableHead className="text-right">
+                                            Выплата, грн.
+                                        </TableHead>
+                                        <TableHead className="text-right">
+                                            Богдану Л.
+                                        </TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    <RoleAssignmentRows
+                                        project={project}
+                                        projectType={projectType}
+                                        members={members}
+                                        projectRoles={projectRoles}
+                                        setProjects={setProjects}
+                                    />
+                                </TableBody>
+                            </Table>
+                        </CollapsibleSection>
                     )
                 },
             },

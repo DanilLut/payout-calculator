@@ -153,7 +153,9 @@ const MemberList = ({
                             type="button"
                             variant="outline"
                             size="sm"
-                            onClick={() => { onEdit(member) }}
+                            onClick={() => {
+                                onEdit(member)
+                            }}
                             aria-label={`Edit ${member.fullName}`}
                         >
                             Edit
@@ -162,7 +164,9 @@ const MemberList = ({
                     <Button
                         variant="destructive"
                         size="sm"
-                        onClick={() => { onDelete(member.id) }}
+                        onClick={() => {
+                            onDelete(member.id)
+                        }}
                         aria-label={`Delete ${member.fullName}`}
                     >
                         Delete
