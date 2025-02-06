@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useProjectsColumns } from '@/components/ProjectsTable/hooks/useProjectsColumns'
+import { useWindowSize } from 'usehooks-ts'
 
 import { handleExport, handleImport } from '@/utils/data-utils'
 
@@ -15,9 +16,13 @@ import {
     RiDownloadLine,
     RiHistoryLine,
     RiListCheck2,
+    RiMenuLine,
 } from '@remixicon/react'
+import { ThemeToggle } from './ThemeToggle'
 
 export function Dashboard() {
+    const [showMenu, setShowMenu] = useState(false)
+
     const [projects, setProjects] = useState<Project[]>(() => {
         const savedData = localStorage.getItem('projectsData')
         return savedData ? (JSON.parse(savedData) as Project[]) : []
@@ -88,50 +93,69 @@ export function Dashboard() {
     const unselectedData = projects.filter((item) => !item.selected)
 
     return (
-        <div className="container mx-auto py-10 grid">
-            <div className="ml-auto flex gap-4 mb-8">
-                <MembersManager members={members} setMembers={setMembers} />
-                <Button
-                    onClick={() => {
-                        handleExport(
-                            projects,
-                            members,
-                            projectTypes,
-                            projectRoles
-                        )
-                    }}
-                >
-                    <RiUploadLine />
-                    Export Data
-                </Button>
-                <Button asChild>
-                    <label className="cursor-pointer">
-                        <RiDownloadLine />
-                        Import Data
-                        <input
-                            type="file"
-                            accept=".json"
-                            onChange={(e) => {
-                                handleImport(
-                                    e,
-                                    setProjects,
-                                    setMembers,
-                                    setProjectTypes,
-                                    setProjectRoles
-                                )
-                            }}
-                            className="hidden"
-                        />
-                    </label>
-                </Button>
+        <div className="container mx-auto pb-10 md:px-16">
+            <div className="flex justify-between mb-8">
+                <ThemeToggle />
+
+                {useWindowSize().width < 768 ? (
+                    <Button
+                        variant={'outline'}
+                        onClick={() => setShowMenu((prev) => !prev)}
+                    >
+                        <RiMenuLine />
+                    </Button>
+                ) : null}
             </div>
 
-            <NewProjectForm
-                setProjects={setProjects}
-                projectTypes={projectTypes}
-            />
+            {useWindowSize().width > 768 || showMenu ? (
+                <>
+                    <div className="flex gap-4 mb-8 flex-col md:flex-row w-full justify-end">
+                        <MembersManager
+                            members={members}
+                            setMembers={setMembers}
+                        />
+                        <Button
+                            onClick={() => {
+                                handleExport(
+                                    projects,
+                                    members,
+                                    projectTypes,
+                                    projectRoles
+                                )
+                            }}
+                        >
+                            <RiUploadLine />
+                            Export Data
+                        </Button>
+                        <Button asChild>
+                            <label className="cursor-pointer">
+                                <RiDownloadLine />
+                                Import Data
+                                <input
+                                    type="file"
+                                    accept=".json"
+                                    onChange={(e) => {
+                                        handleImport(
+                                            e,
+                                            setProjects,
+                                            setMembers,
+                                            setProjectTypes,
+                                            setProjectRoles
+                                        )
+                                    }}
+                                    className="hidden"
+                                />
+                            </label>
+                        </Button>
+                    </div>
+                    <NewProjectForm
+                        setProjects={setProjects}
+                        projectTypes={projectTypes}
+                    />
+                </>
+            ) : null}
 
-            <div className="mt-8">
+            <div className="mt-8 w-full">
                 <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
                     <RiListCheck2 />
                     Projects
@@ -139,7 +163,7 @@ export function Dashboard() {
                 <DataTable columns={columns} data={unselectedData} />
             </div>
 
-            <div className="mt-8">
+            <div className="mt-8 w-full">
                 <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
                     <RiHistoryLine /> History
                 </h2>

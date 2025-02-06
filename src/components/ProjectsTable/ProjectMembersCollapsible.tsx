@@ -19,11 +19,11 @@ const CollapsibleSection = ({ children }: CollapsibleSectionProps) => {
             <div>
                 <CollapsibleTrigger className="w-full h-10 flex items-center justify-end">
                     {isOpen ? (
-                        <span className="flex items-center">
+                        <span className="flex items-center text-nowrap">
                             Hide <RiArrowUpSLine />
                         </span>
                     ) : (
-                        <span className="flex items-center">
+                        <span className="flex items-center text-nowrap">
                             Show all <RiArrowDownSLine />
                         </span>
                     )}

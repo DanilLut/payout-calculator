@@ -63,7 +63,7 @@ export const NewProjectForm = ({
             <h2 className="text-xl font-bold mb-4">Create New Project</h2>
             <form
                 onSubmit={handleCreateProject}
-                className="flex gap-4 items-end"
+                className="flex gap-4 flex-col md:flex-row"
             >
                 <div className="flex-1">
                     <Input
