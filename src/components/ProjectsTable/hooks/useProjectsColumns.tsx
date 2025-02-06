@@ -31,11 +31,6 @@ import {
 } from '@/components/ui/select'
 import { UUID } from 'crypto'
 
-import {
-    Collapsible,
-    CollapsibleContent,
-    CollapsibleTrigger,
-} from '@/components/ui/collapsible'
 import CollapsibleSection from '../ProjectMembersCollapsible'
 
 export const useProjectsColumns = (
