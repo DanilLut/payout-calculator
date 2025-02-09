@@ -33,7 +33,7 @@ export interface Project {
     roleAssignments: Record<UUID, UUID | null>
     selected: boolean
     selectedTimestamp: number | null
-    date: string | undefined
+    creationDate: number | undefined
 }
 
 export interface AppData {

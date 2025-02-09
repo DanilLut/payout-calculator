@@ -17,6 +17,7 @@ import {
     RiHistoryLine,
     RiListCheck2,
     RiMenuLine,
+    RiCloseLine,
 } from '@remixicon/react'
 import { ThemeToggle } from './ThemeToggle'
 
@@ -79,6 +80,12 @@ export function Dashboard() {
         localStorage.setItem('projectRolesData', JSON.stringify(projectRoles))
     }, [projectRoles])
 
+    const clearSelectedProjects = () => {
+        setProjects((prev) =>
+            prev.filter((project) => project.selected != true)
+        )
+    }
+
     const columns = useProjectsColumns(
         members,
         projectTypes,
@@ -93,12 +100,16 @@ export function Dashboard() {
     const unselectedData = projects.filter((item) => !item.selected)
 
     const totalUnselected = unselectedData.reduce((acc, project) => {
-        const projectType = projectTypes.find(pt => pt.id === project.projectTypeId)
+        const projectType = projectTypes.find(
+            (pt) => pt.id === project.projectTypeId
+        )
         return acc + (projectType?.price || 0)
     }, 0)
 
     const totalSelected = selectedData.reduce((acc, project) => {
-        const projectType = projectTypes.find(pt => pt.id === project.projectTypeId)
+        const projectType = projectTypes.find(
+            (pt) => pt.id === project.projectTypeId
+        )
         return acc + (projectType?.price || 0)
     }, 0)
 
@@ -170,14 +181,32 @@ export function Dashboard() {
                     <RiListCheck2 />
                     Projects
                 </h2>
-                <DataTable columns={columns} data={unselectedData} total={totalUnselected} />
+                <DataTable
+                    columns={columns}
+                    data={unselectedData}
+                    total={totalUnselected}
+                />
             </div>
 
             <div className="mt-8 w-full">
-                <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-                    <RiHistoryLine /> History
-                </h2>
-                <DataTable columns={columns} data={selectedData} total={totalSelected} />
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-xl font-bold flex items-center gap-2">
+                        <RiHistoryLine /> History
+                    </h2>
+                    <Button
+                        variant="ghost"
+                        onClick={clearSelectedProjects}
+                        disabled={selectedData.length === 0}
+                    >
+                        <RiCloseLine className="mr-2 h-4 w-4" />
+                        Clear History
+                    </Button>
+                </div>
+                <DataTable
+                    columns={columns}
+                    data={selectedData}
+                    total={totalSelected}
+                />
             </div>
         </div>
     )

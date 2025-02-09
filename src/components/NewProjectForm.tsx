@@ -15,9 +15,7 @@ import {
     SelectValue,
 } from '@/components/ui/select'
 
-import {
-    RiAddLargeLine,
-} from '@remixicon/react'
+import { RiAddLargeLine } from '@remixicon/react'
 
 interface NewProjectFormProps {
     projectTypes: ProjectType[]
@@ -54,7 +52,7 @@ export const NewProjectForm = ({
             }, {}),
             selected: false,
             selectedTimestamp: null,
-            date: new Date().toISOString().split('T')[0],
+            creationDate: Date.now(),
         }
 
         setProjects((prev) => [...prev, newProject])
