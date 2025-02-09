@@ -43,6 +43,18 @@ import {
     SelectValue,
 } from '@/components/ui/select'
 
+import {
+    AlertDialog,
+    AlertDialogTrigger,
+    AlertDialogContent,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogCancel,
+    AlertDialogAction,
+} from '@/components/ui/alert-dialog'
+
 interface ProjectFilters {
     client: string
     projectType: UUID | null
@@ -252,20 +264,45 @@ export function Dashboard() {
                     <h2 className="text-xl font-bold flex items-center gap-2">
                         <RiHistoryLine /> History
                     </h2>
-                    <Button
-                        variant="ghost"
-                        onClick={clearSelectedProjects}
-                        disabled={selectedData.length === 0}
-                    >
-                        <RiCloseLine className="mr-2 h-4 w-4" />
-                        Clear History
-                    </Button>
                 </div>
-                <FilterBar
-                    filters={selectedFilters}
-                    setFilters={setSelectedFilters}
-                    projectTypes={projectTypes}
-                />
+                <div className="flex flex-col md:flex-row mb-4 md:mb-0 gap-2">
+                    <FilterBar
+                        filters={selectedFilters}
+                        setFilters={setSelectedFilters}
+                        projectTypes={projectTypes}
+                    />
+                    <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                            <Button
+                                variant="destructive"
+                                disabled={selectedData.length === 0}
+                            >
+                                <RiCloseLine className="mr-2 h-4 w-4" />
+                                Clear History
+                            </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                            <AlertDialogHeader>
+                                <AlertDialogTitle>
+                                    Are you absolutely sure?
+                                </AlertDialogTitle>
+                                <AlertDialogDescription>
+                                    This action cannot be undone. This will
+                                    permanently remove all items from your
+                                    history.
+                                </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction
+                                    onClick={clearSelectedProjects}
+                                >
+                                    Confirm
+                                </AlertDialogAction>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
+                </div>
                 <DataTable
                     columns={columns}
                     data={filteredSelectedData}
@@ -282,11 +319,7 @@ interface FilterBarProps {
     projectTypes: ProjectType[]
 }
 
-function FilterBar({
-    filters,
-    setFilters,
-    projectTypes,
-}: FilterBarProps) {
+function FilterBar({ filters, setFilters, projectTypes }: FilterBarProps) {
     return (
         <div className="flex flex-wrap gap-2 mb-3">
             <Popover>
