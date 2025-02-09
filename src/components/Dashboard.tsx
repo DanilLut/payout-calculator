@@ -92,6 +92,16 @@ export function Dashboard() {
 
     const unselectedData = projects.filter((item) => !item.selected)
 
+    const totalUnselected = unselectedData.reduce((acc, project) => {
+        const projectType = projectTypes.find(pt => pt.id === project.projectTypeId)
+        return acc + (projectType?.price || 0)
+    }, 0)
+
+    const totalSelected = selectedData.reduce((acc, project) => {
+        const projectType = projectTypes.find(pt => pt.id === project.projectTypeId)
+        return acc + (projectType?.price || 0)
+    }, 0)
+
     return (
         <div className="container mx-auto pb-10 md:px-16">
             <div className="flex justify-between mb-8">
@@ -160,14 +170,14 @@ export function Dashboard() {
                     <RiListCheck2 />
                     Projects
                 </h2>
-                <DataTable columns={columns} data={unselectedData} />
+                <DataTable columns={columns} data={unselectedData} total={totalUnselected} />
             </div>
 
             <div className="mt-8 w-full">
                 <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
                     <RiHistoryLine /> History
                 </h2>
-                <DataTable columns={columns} data={selectedData} />
+                <DataTable columns={columns} data={selectedData} total={totalSelected} />
             </div>
         </div>
     )

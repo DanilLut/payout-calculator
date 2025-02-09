@@ -16,11 +16,13 @@ import {
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    total?: number
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
+    total,
 }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
         data,
@@ -63,6 +65,15 @@ export function DataTable<TData, TValue>({
                             ))}
                         </TableRow>
                     ))}
+                    <TableRow key="total" className="h-12">
+                        <TableCell colSpan={4} className="text-left font-bold">
+                            Total
+                        </TableCell>
+                        <TableCell className="text-left font-bold">
+                            {total ?? 0} грн.
+                        </TableCell>
+                        <TableCell></TableCell>
+                    </TableRow>
                 </TableBody>
             </Table>
         </div>
