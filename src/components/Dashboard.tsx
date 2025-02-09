@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useProjectsColumns } from '@/components/ProjectsTable/hooks/useProjectsColumns'
 import { useWindowSize } from 'usehooks-ts'
+import { useProjectData } from '@/contexts/ProjectDataContext'
 
 import { handleExport, handleImport } from '@/utils/data-utils'
 
@@ -64,18 +65,29 @@ interface ProjectFilters {
 export function Dashboard() {
     const [showMenu, setShowMenu] = useState(false)
 
-    const [projects, setProjects] = useState<Project[]>(() =>
-        JSON.parse(localStorage.getItem('projectsData') || '[]')
-    )
-    const [members, setMembers] = useState<ProjectMember[]>(() =>
-        JSON.parse(localStorage.getItem('membersData') || '[]')
-    )
-    const [projectTypes, setProjectTypes] = useState<ProjectType[]>(() =>
-        JSON.parse(localStorage.getItem('projectTypesData') || '[]')
-    )
-    const [projectRoles, setProjectRoles] = useState<ProjectRole[]>(() =>
-        JSON.parse(localStorage.getItem('projectRolesData') || '[]')
-    )
+    const {
+        projects,
+        setProjects,
+        members,
+        setMembers,
+        projectTypes,
+        setProjectTypes,
+        projectRoles,
+        setProjectRoles,
+    } = useProjectData()
+    //
+    // const [projects, setProjects] = useState<Project[]>(() =>
+    //     JSON.parse(localStorage.getItem('projectsData') || '[]')
+    // )
+    // const [members, setMembers] = useState<ProjectMember[]>(() =>
+    //     JSON.parse(localStorage.getItem('membersData') || '[]')
+    // )
+    // const [projectTypes, setProjectTypes] = useState<ProjectType[]>(() =>
+    //     JSON.parse(localStorage.getItem('projectTypesData') || '[]')
+    // )
+    // const [projectRoles, setProjectRoles] = useState<ProjectRole[]>(() =>
+    //     JSON.parse(localStorage.getItem('projectRolesData') || '[]')
+    // )
 
     const [unselectedFilters, setUnselectedFilters] = useState<ProjectFilters>({
         client: '',
