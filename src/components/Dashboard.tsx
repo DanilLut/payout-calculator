@@ -159,7 +159,9 @@ export function Dashboard() {
         .filter((item) => item.selected)
         .sort((a, b) => (b.selectedTimestamp ?? 0) - (a.selectedTimestamp ?? 0))
 
-    const unselectedData = projects.filter((item) => !item.selected)
+    const unselectedData = projects
+        .filter((item) => !item.selected)
+        .sort((a, b) => (b.creationDate ?? 0) - (a.creationDate ?? 0))
 
     const filteredUnselectedData = filterProjects(
         unselectedData,
