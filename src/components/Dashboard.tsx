@@ -5,7 +5,7 @@ import { useProjectData } from '@/contexts/ProjectDataContext'
 
 import { handleExport, handleImport } from '@/utils/data-utils'
 
-import { Project, ProjectMember, ProjectType, ProjectRole } from '@/types/types'
+import { Project, ProjectType } from '@/types/types'
 
 import { DataTable } from '@/components/DataTable'
 import { MembersManager } from '@/components/MembersManager'
@@ -75,19 +75,6 @@ export function Dashboard() {
         projectRoles,
         setProjectRoles,
     } = useProjectData()
-    //
-    // const [projects, setProjects] = useState<Project[]>(() =>
-    //     JSON.parse(localStorage.getItem('projectsData') || '[]')
-    // )
-    // const [members, setMembers] = useState<ProjectMember[]>(() =>
-    //     JSON.parse(localStorage.getItem('membersData') || '[]')
-    // )
-    // const [projectTypes, setProjectTypes] = useState<ProjectType[]>(() =>
-    //     JSON.parse(localStorage.getItem('projectTypesData') || '[]')
-    // )
-    // const [projectRoles, setProjectRoles] = useState<ProjectRole[]>(() =>
-    //     JSON.parse(localStorage.getItem('projectRolesData') || '[]')
-    // )
 
     const [unselectedFilters, setUnselectedFilters] = useState<ProjectFilters>({
         client: '',
