@@ -200,7 +200,7 @@ export function Dashboard() {
 
             {(useWindowSize().width > 768 || showMenu) && (
                 <>
-                    <div className="flex gap-4 mb-8 flex-col md:flex-row w-full justify-end">
+                    <div className="flex gap-3 mb-8 flex-col md:flex-row w-full justify-end">
                         <MembersManager
                             members={members}
                             setMembers={setMembers}
@@ -266,7 +266,7 @@ export function Dashboard() {
                         <RiHistoryLine /> History
                     </h2>
                 </div>
-                <div className="flex flex-col md:flex-row mb-4 md:mb-0 gap-2">
+                <div className="flex flex-col md:flex-row mb-3 md:mb-0 gap-3">
                     <FilterBar
                         filters={selectedFilters}
                         setFilters={setSelectedFilters}
@@ -322,7 +322,7 @@ interface FilterBarProps {
 
 function FilterBar({ filters, setFilters, projectTypes }: FilterBarProps) {
     return (
-        <div className="flex flex-wrap gap-2 mb-3">
+        <div className="flex md:flex-nowrap flex-wrap gap-3 md:mb-3">
             <Popover>
                 <PopoverTrigger asChild>
                     <Button

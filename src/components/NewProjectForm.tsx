@@ -68,7 +68,7 @@ export const NewProjectForm = ({
             </h2>
             <form
                 onSubmit={handleCreateProject}
-                className="flex gap-4 flex-col md:flex-row"
+                className="flex gap-3 flex-col md:flex-row"
             >
                 <div className="flex-1">
                     <Input
