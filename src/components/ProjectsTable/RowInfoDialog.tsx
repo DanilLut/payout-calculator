@@ -22,11 +22,13 @@ export const RowInfoDialog = ({
     const { projectTypes } = useProjectData()
     const projectType = projectTypes.find((pt) => pt.id === row.projectTypeId)
 
-return (
+    return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>{projectType?.title || row.projectTypeId}</DialogTitle>
+                    <DialogTitle>
+                        {projectType?.title || row.projectTypeId}
+                    </DialogTitle>
                     <DialogDescription>Project Details</DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
@@ -49,20 +51,26 @@ return (
                     <div>
                         <p className="font-medium">Creation Date:</p>
                         <p>
-                            {new Date(row.creationDate).toLocaleString(undefined, {
-                                dateStyle: 'medium',
-                                timeStyle: 'short',
-                            })}
+                            {new Date(row.creationDate).toLocaleString(
+                                undefined,
+                                {
+                                    dateStyle: 'medium',
+                                    timeStyle: 'short',
+                                }
+                            )}
                         </p>
                     </div>
                     {row.selectedTimestamp && (
                         <div>
                             <p className="font-medium">Completion Date:</p>
                             <p>
-                                {new Date(row.selectedTimestamp).toLocaleString(undefined, {
-                                    dateStyle: 'medium',
-                                    timeStyle: 'short',
-                                })}
+                                {new Date(row.selectedTimestamp).toLocaleString(
+                                    undefined,
+                                    {
+                                        dateStyle: 'medium',
+                                        timeStyle: 'short',
+                                    }
+                                )}
                             </p>
                         </div>
                     )}

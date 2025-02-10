@@ -248,11 +248,13 @@ export function Dashboard() {
                 <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
                     <RiListCheck2 /> Projects
                 </h2>
-                <FilterBar
-                    filters={unselectedFilters}
-                    setFilters={setUnselectedFilters}
-                    projectTypes={projectTypes}
-                />
+                <div className="mb-3">
+                    <FilterBar
+                        filters={unselectedFilters}
+                        setFilters={setUnselectedFilters}
+                        projectTypes={projectTypes}
+                    />
+                </div>
                 <DataTable
                     columns={columns}
                     data={filteredUnselectedData}
