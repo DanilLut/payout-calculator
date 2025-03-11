@@ -11,9 +11,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
-import { RiAddLargeLine, RiUser3Line, RiFileListLine, RiNumbersLine } from '@remixicon/react'
+import { RiUser3Line, RiFileListLine, RiNumbersLine } from '@remixicon/react'
 import { Textarea } from './ui/textarea'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 
 interface NewProjectFormProps {
