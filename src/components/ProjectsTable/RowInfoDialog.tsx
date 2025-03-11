@@ -74,6 +74,13 @@ export const RowInfoDialog = ({
                             </p>
                         </div>
                     )}
+
+                    <div>
+                        <p className="font-medium">Notes:</p>
+                        <p className="whitespace-pre-wrap">
+                            {row.notes || 'No notes'}
+                        </p>
+                    </div>
                 </div>
             </DialogContent>
         </Dialog>

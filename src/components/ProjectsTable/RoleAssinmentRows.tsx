@@ -6,7 +6,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
-import { Project, ProjectMember, ProjectType, ProjectRole } from '@/types/types'
+import {
+    Project,
+    ProjectMember,
+    ProjectType,
+    ProjectRole,
+    ProjectTypeTitle,
+} from '@/types/types'
 import { UUID } from 'crypto'
 
 interface RoleAssignmentRowsProps {
@@ -37,7 +43,8 @@ export const RoleAssignmentRows = ({
             const basePayoutAmount =
                 ((projectType?.price ?? 0) / 100) * rolePayoutPercentage
 
-            const middlemanFeePercent = 10
+            const middlemanFeePercent =
+                projectType?.title === ProjectTypeTitle.KKR ? 0 : 10
             const middlemanFee = Math.ceil(
                 (basePayoutAmount / 100) * middlemanFeePercent
             )

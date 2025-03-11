@@ -5,6 +5,7 @@ export enum ProjectTypeTitle {
     DIPLOMA = 'Дипломная',
     COMPANY_PRACTICE = 'Практика на предприятии',
     CPP_PRACTICE = 'Практическая С++',
+    KKR = 'ККР',
 }
 
 export interface ProjectRole {
@@ -34,6 +35,8 @@ export interface Project {
     selected: boolean
     selectedTimestamp: number | null
     creationDate: number
+    quantity?: number
+    notes?: string
 }
 
 export interface AppData {

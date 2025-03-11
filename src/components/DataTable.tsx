@@ -66,7 +66,7 @@ export function DataTable<TData, TValue>({
                         </TableRow>
                     ))}
                     <TableRow key="total" className="h-12">
-                        <TableCell colSpan={4} className="text-left font-bold">
+                        <TableCell colSpan={5} className="text-left font-bold">
                             Total
                         </TableCell>
                         <TableCell className="text-left font-bold">

@@ -168,21 +168,15 @@ export function Dashboard() {
     )
     const filteredSelectedData = filterProjects(selectedData, selectedFilters)
 
-    const totalUnselected = filteredUnselectedData.reduce(
-        (acc, project) =>
-            acc +
-            (projectTypes.find((pt) => pt.id === project.projectTypeId)
-                ?.price || 0),
-        0
-    )
+    const totalUnselected = filteredUnselectedData.reduce((acc, project) => {
+        const pt = projectTypes.find((pt) => pt.id === project.projectTypeId)
+        return acc + (pt?.price || 0) * (project.quantity || 1)
+    }, 0)
 
-    const totalSelected = filteredSelectedData.reduce(
-        (acc, project) =>
-            acc +
-            (projectTypes.find((pt) => pt.id === project.projectTypeId)
-                ?.price || 0),
-        0
-    )
+    const totalSelected = filteredSelectedData.reduce((acc, project) => {
+        const pt = projectTypes.find((pt) => pt.id === project.projectTypeId)
+        return acc + (pt?.price || 0) * (project.quantity || 1)
+    }, 0)
 
     return (
         <div className="container mx-auto pb-10 md:px-16">

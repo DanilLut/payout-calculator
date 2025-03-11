@@ -11,6 +11,7 @@ import { MoreHorizontal } from 'lucide-react'
 
 import { Project } from '@/types/types'
 import { RowInfoDialog } from '@/components/ProjectsTable/RowInfoDialog'
+import { EditProjectDialog } from './EditProjectDialog'
 
 interface RowActionsCellProps {
     row: Row<Project>
@@ -19,6 +20,7 @@ interface RowActionsCellProps {
 
 export const RowActionsCell = ({ row, setProjects }: RowActionsCellProps) => {
     const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
 
     const handleDelete = () => {
         console.log(row.original.id)
@@ -42,7 +44,11 @@ export const RowActionsCell = ({ row, setProjects }: RowActionsCellProps) => {
                     >
                         Show Info
                     </DropdownMenuItem>
-                    <DropdownMenuItem>Edit</DropdownMenuItem>
+                    <DropdownMenuItem
+                onClick={() => setIsEditDialogOpen(true)}
+            >
+                Edit
+            </DropdownMenuItem>
                     <DropdownMenuItem
                         className="text-red-500"
                         onClick={handleDelete}
@@ -52,6 +58,12 @@ export const RowActionsCell = ({ row, setProjects }: RowActionsCellProps) => {
                 </DropdownMenuContent>
             </DropdownMenu>
 
+            <EditProjectDialog
+                project={row.original}
+                isOpen={isEditDialogOpen}
+                onOpenChange={setIsEditDialogOpen}
+                setProjects={setProjects}
+            />
             <RowInfoDialog
                 row={row.original}
                 isOpen={isDialogOpen}

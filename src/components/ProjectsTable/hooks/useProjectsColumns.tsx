@@ -32,6 +32,7 @@ import {
 import { UUID } from 'crypto'
 
 import CollapsibleSection from '../ProjectMembersCollapsible'
+import { Input } from '@/components/ui/input'
 
 export const useProjectsColumns = (
     members: ProjectMember[],
@@ -92,6 +93,11 @@ export const useProjectsColumns = (
                                                         newProjectType.id,
                                                     roleAssignments:
                                                         newRoleAssignments,
+                                                    quantity:
+                                                        newProjectType.title ===
+                                                        ProjectTypeTitle.KKR
+                                                            ? p.quantity || 1
+                                                            : undefined,
                                                 }
                                             }
                                             return p
@@ -157,13 +163,60 @@ export const useProjectsColumns = (
             {
                 header: 'Цена проекта',
                 cell: ({ row }) => {
+                    const project = row.original
                     const projectType = projectTypes.find(
-                        (pt) => pt.id === row.original.projectTypeId
+                        (pt) => pt.id === project.projectTypeId
                     )
-                    return projectType?.price ?? 'N/A'
+                    const quantity = project.quantity || 1
+                    return projectType
+                        ? `${projectType.price * quantity} грн.`
+                        : 'N/A'
                 },
             },
+            {
+                header: 'Количество',
+                cell: ({ row }) => {
+                    const project = row.original
+                    const projectType = projectTypes.find(
+                        (pt) => pt.id === project.projectTypeId
+                    )
 
+                    if (projectType?.title !== ProjectTypeTitle.KKR) return 1
+
+                    return (
+                        <Input
+                            type="number"
+                            min="1"
+                            value={project.quantity || 1}
+                            onChange={(e) => {
+                                const value = parseInt(e.target.value) || 1
+                                setProjects((prev) =>
+                                    prev.map((p) =>
+                                        p.id === project.id
+                                            ? { ...p, quantity: value }
+                                            : p
+                                    )
+                                )
+                            }}
+                        />
+                    )
+                },
+            },
+            {
+                accessorKey: 'notes',
+                header: 'Notes',
+                cell: ({ row }) => {
+                    const notes = row.original.notes
+                    return notes ? (
+                        <div 
+                            className="max-w-[200px] truncate" 
+                            title={notes}
+                        >
+                            {notes}
+                        </div>
+                    ) : null
+                },
+            },
             {
                 id: 'actions',
                 cell: ({ row }) => (
